@@ -1,4 +1,4 @@
-the  random
+the random
 words
 in this text
 file are

@@ -8,7 +8,8 @@ fs.readFile(__dirname + '\\assignment.txt', 'utf-8', function(error, data) {
         var count = 0
         const lines = data.split("\n")
         for (var line in lines) {
-            const words = line.split(" ")
+            var g = lines[line]
+            const words = g.split(" ")
             count = count + words.length
         }
     }
