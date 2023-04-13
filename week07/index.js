@@ -8,32 +8,29 @@ const db = redis.createClient({
 });
 
 await db.connect()
-//await db.mSet('totalCount', '0')
-////await db.mSet('count1', '0', 'count2', '0')
 
-/*the goal here is to make something that counts the total amout of times each page has been opened collectively
-the global count variable is meant to be incremented each time any page is opened; that number should be shown underneath the 
-pre-existing text
-The count variable may need to be restructured 
-Use mSet() somehow
-*/
+app.use(express.static('public'))
+
 app.get('/inc', async(req, res) => {
-    const count = await db.incr("count1") 
-    const number = await db.get('count3') //original plan, revised 
-    const total = count + number //original plan, revised; why doesn't it do the addition correctly?
-    console.log(total) //original plan, revised; this line was put here so that I could see if this was working properly
-    res.send(`count: ${count}, Here's the number of times the pages were opened collectively: ${total}`) //new plan
-    //res.send(`Here's the number of times the pages were opened collectively: ${total}`) //original plan, revised
+    await db.incr("countC") 
+    const count = await db.get('countC') 
+    await db.incr('newCount')
+    const total = await db.get('newCount')
+    console.log(total) 
+    res.send(`count: ${count}, Here's the number of times the pages were opened collectively: ${total}`)
 })
 
 app.get('/dec', async(req, res) => {
-    const count4 = await db.incrBy("count2", -1)
-    const count = await db.incr('count3') //original plan, revised
-    const number = await db.get('count1') //original plan, revised
-    const total = count + number //original plan, revised; why doesn't it do the addtion correctly?
-    console.log(total) //refer to line 26 comment
-    res.send(`count: ${count4}, Here's the number of times the pages were opened collectively: ${total}`) //new plan
-    //res.send(`Here's the number of times the pages were opened collectively: ${total}`) //original plan, revised
+    await db.incrBy("countD", -1)
+    const count4 = await db.get('countD')
+    await db.incr('newCount')
+    const total = await db.get('newCount') 
+    console.log(total) 
+    res.send(`count: ${count4}, Here's the number of times the pages were opened collectively: ${total}`) 
+})
+
+app.get('/new', async(req,res) => {
+    
 })
 
 app.listen(port, () => {
