@@ -201,11 +201,11 @@ app.get('/HTMLstuff2.html/:variable2', async (req, res) => {
                      width="90"
                      height="120"
                      alt="Non-Existant Picture Number One" />
-            
+                <br />
                 <img scr=""
                      width="90"
                      height="120"
-                     alt="Non-Existant Picture Number Two"
+                     alt="Non-Existant Picture Number Two"<br />
             
             <h2>Links:</h2>
                 <a href="http://localhost/HTMLstuff.html/PTFC">My Formatted Content</a><br />
